@@ -1,0 +1,241 @@
+<style>
+  :root{
+    --paper:#F4EFE6; --card:#FCFAF4; --ink:#241B14; --stone:#6B5D49;
+    --muted:#9A8B76; --amber:#A2702A; --tobacco:#5E4128; --danger:#9C4230;
+    --line:rgba(36,27,20,0.12);
+    --serif:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,'Times New Roman',serif;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.65;}
+  .wrap{max-width:860px;margin:0 auto;padding:56px 28px 120px;}
+  .shell{max-width:64ch;}
+  a{color:var(--amber);text-underline-offset:2px;}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--amber);}
+  .mark{display:flex;align-items:center;gap:12px;margin-top:14px;}
+  .diamond{width:26px;height:26px;border:2.5px solid var(--amber);transform:rotate(45deg);flex:none;}
+  .wordmark{font-family:var(--serif);font-weight:600;font-size:34px;letter-spacing:0.18em;}
+  h1.title{font-family:var(--serif);font-weight:600;font-size:clamp(34px,5vw,50px);line-height:1.04;
+    letter-spacing:-0.01em;margin:26px 0 0;text-wrap:balance;}
+  .lede{font-family:var(--serif);font-style:italic;font-size:20px;line-height:1.5;color:var(--stone);
+    margin:16px 0 0;max-width:56ch;}
+  .meta{margin-top:18px;font-size:13.5px;color:var(--muted);letter-spacing:0.02em;}
+  .toc{margin-top:30px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;}
+  .toc h4{margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);}
+  .toc .cols{display:grid;grid-template-columns:1fr 1fr;gap:24px 32px;margin-top:12px;}
+  @media(max-width:640px){.toc .cols{grid-template-columns:1fr;}}
+  .toc .doc{font-family:var(--serif);font-size:18px;font-weight:600;margin:0 0 10px;}
+  .toc ol{margin:0;padding:0;list-style:none;counter-reset:t;}
+  .toc li{counter-increment:t;font-size:14px;padding:3px 0;color:var(--stone);}
+  .toc li a{text-decoration:none;color:var(--stone);}
+  .toc li a:hover{color:var(--amber);}
+  .toc li::before{content:counter(t) ". ";color:var(--muted);font-variant-numeric:tabular-nums;}
+  .docwrap{margin-top:64px;}
+  .docmark{font-size:12px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--amber);}
+  h2.dochead{font-family:var(--serif);font-weight:600;font-size:clamp(28px,4vw,38px);margin:10px 0 0;letter-spacing:-0.01em;}
+  .docsub{color:var(--stone);font-size:14.5px;margin:8px 0 0;}
+  hr.rule{border:none;border-top:1px solid var(--line);margin:22px 0 0;}
+  section.clause{padding-top:34px;}
+  section.clause > h3{font-family:var(--serif);font-weight:600;font-size:21px;margin:0 0 10px;
+    display:flex;gap:12px;align-items:baseline;}
+  section.clause > h3 .num{color:var(--amber);font-variant-numeric:tabular-nums;font-size:16px;font-weight:700;flex:none;}
+  .shell p{margin:0 0 12px;font-size:16px;}
+  .shell p:last-child{margin-bottom:0;}
+  .shell ul{margin:4px 0 12px;padding-left:20px;}
+  .shell li{margin:0 0 7px;font-size:15.5px;}
+  .shell strong{color:var(--ink);}
+  .k{font-weight:700;color:var(--tobacco);}
+  .foot{margin-top:80px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);}
+</style>
+
+<div class="wrap">
+  <div class="shell">
+    <div class="eyebrow">LEAF · Legal</div>
+    <div class="mark"><span class="diamond"></span><span class="wordmark">LEAF</span></div>
+    <h1 class="title">Privacy Policy &amp; Terms of Service</h1>
+    <p class="lede">A cigar journal that keeps your notes yours — and is plain about the little it shares.</p>
+    <p class="meta">Effective July 13, 2026 · Version 1.0</p>
+  </div>
+
+  <div class="toc shell" style="max-width:none;">
+    <h4>On this page</h4>
+    <div class="cols">
+      <div>
+        <p class="doc">Privacy Policy</p>
+        <ol>
+          <li><a href="#p1">Who we are</a></li>
+          <li><a href="#p2">What we collect</a></li>
+          <li><a href="#p3">How we use it</a></li>
+          <li><a href="#p4">Age (21+) &amp; your DOB</a></li>
+          <li><a href="#p5">Analytics &amp; your consent</a></li>
+          <li><a href="#p6">Aggregate "Cigar Insights"</a></li>
+          <li><a href="#p7">Who we share with</a></li>
+          <li><a href="#p8">Your rights &amp; choices</a></li>
+          <li><a href="#p9">Security &amp; retention</a></li>
+          <li><a href="#p10">Children, changes &amp; contact</a></li>
+        </ol>
+      </div>
+      <div>
+        <p class="doc">Terms of Service</p>
+        <ol>
+          <li><a href="#t1">Agreement &amp; eligibility</a></li>
+          <li><a href="#t2">What LEAF is (and isn't)</a></li>
+          <li><a href="#t3">Your account</a></li>
+          <li><a href="#t4">Your content &amp; the license</a></li>
+          <li><a href="#t5">The catalog &amp; added cigars</a></li>
+          <li><a href="#t6">Acceptable use</a></li>
+          <li><a href="#t7">Disclaimers</a></li>
+          <li><a href="#t8">Liability &amp; indemnity</a></li>
+          <li><a href="#t9">Termination &amp; changes</a></li>
+          <li><a href="#t10">Governing law &amp; contact</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="docwrap shell">
+    <div class="docmark">Document 1</div>
+    <h2 class="dochead">Privacy Policy</h2>
+    <p class="docsub">What LEAF collects, why, who sees it, and the controls you have.</p>
+    <hr class="rule" />
+
+    <section class="clause" id="p1">
+      <h3><span class="num">1</span> Who we are</h3>
+      <p>LEAF ("LEAF," "we," "us") is a single-player cigar journal for iPhone. The <strong>data controller</strong> responsible for your information is <strong>Kevin Washington</strong> (an individual), reachable at <a href="mailto:privacy@leafcigars.fyi">privacy@leafcigars.fyi</a>.</p>
+    </section>
+
+    <section class="clause" id="p2">
+      <h3><span class="num">2</span> What we collect</h3>
+      <p><span class="k">Your account.</span> When you sign in with Apple, we receive your name and an email address — which may be an Apple <em>private relay</em> address that hides your real one. To confirm you're old enough (see §4), we collect your <strong>date of birth</strong> once; it's stored to enforce the age gate and is never shown to anyone.</p>
+      <p><span class="k">Your journal.</span> The cigars you log and everything you add to them: ratings, written reviews, tasting-note tags, an optional photo, the places you type ("where smoked" / "where bought"), and price. This is <strong>your private content</strong>.</p>
+      <p><span class="k">Usage &amp; device.</span> With your consent (see §5), anonymous product-analytics events describing <em>which features you use</em> — never your journal content — plus basic app/device info and a <strong>coarse country</strong> derived from your IP address.</p>
+    </section>
+
+    <section class="clause" id="p3">
+      <h3><span class="num">3</span> How we use it</h3>
+      <ul>
+        <li>Run your account and store your journal.</li>
+        <li>Confirm you meet the 21+ age requirement.</li>
+        <li>With your consent, understand which features are used so we can improve LEAF.</li>
+        <li>With your consent, build the aggregate "Cigar Insights" described in §6.</li>
+        <li>Keep the service secure and comply with the law.</li>
+      </ul>
+    </section>
+
+    <section class="clause" id="p4">
+      <h3><span class="num">4</span> Age (21+) and your date of birth</h3>
+      <p>LEAF is for adults <strong>21 and older</strong>. Your date of birth is used <em>solely</em> to verify this, is enforced on our server, and is never displayed. LEAF is not directed to, and we do not knowingly collect data from, anyone under 21.</p>
+    </section>
+
+    <section class="clause" id="p5">
+      <h3><span class="num">5</span> Analytics and your consent</h3>
+      <p>We use <strong>PostHog</strong> (a US-based analytics provider) to understand product usage. It is <strong>content-free by design</strong>: it records actions and counts, never your written reviews, your rating values, your photos, or precise locations.</p>
+      <ul>
+        <li><strong>EU / EEA / UK:</strong> analytics is <strong>off until you opt in</strong>.</li>
+        <li><strong>Everywhere else (incl. US):</strong> analytics is on by default with a clear <strong>opt-out</strong> in Settings → Privacy → "Share usage data."</li>
+      </ul>
+    </section>
+
+    <section class="clause" id="p6">
+      <h3><span class="num">6</span> Aggregate "Cigar Insights"</h3>
+      <p>If you turn on <strong>"Share cigar insights"</strong> (off by default), we create <strong>de-identified, aggregate statistics</strong> from ratings and the cigars people log — for example, a cigar's average rating, or how often a line is logged in a given <strong>city</strong>. This information is aggregated to <strong>city level at most</strong> and <strong>does not identify you individually</strong>. We may share or sell it to partners in the cigar industry for their own market research.</p>
+      <p>We <strong>never</strong> share your written reviews, your photos, your individual logs, or your precise location. You can turn this on or off anytime in Settings, and it is separate from the analytics choice in §5.</p>
+    </section>
+
+    <section class="clause" id="p7">
+      <h3><span class="num">7</span> Who we share with</h3>
+      <ul>
+        <li><strong>Service providers</strong> who process data on our behalf: <span class="k">Supabase</span> (database, authentication, and private photo storage; US), <span class="k">PostHog</span> (analytics; US), and <span class="k">Apple</span> (Sign in with Apple).</li>
+        <li><strong>Cigar-industry partners</strong>, only the de-identified aggregate insights of §6, and only with your opt-in.</li>
+        <li><strong>Legal &amp; safety</strong>: when required by law, or to protect rights and safety.</li>
+        <li><strong>A future owner</strong>, if LEAF is involved in a merger or acquisition.</li>
+      </ul>
+      <p>We do <strong>not</strong> sell your personal, identifiable information.</p>
+    </section>
+
+    <section class="clause" id="p8">
+      <h3><span class="num">8</span> Your rights &amp; choices</h3>
+      <ul>
+        <li><strong>Access / export</strong> your data — Settings → Account → "Export my data."</li>
+        <li><strong>Delete</strong> your account and everything in it — Settings → Account → "Delete account." This is permanent.</li>
+        <li><strong>Analytics &amp; insights</strong> — the two toggles in Settings → Privacy, reversible anytime.</li>
+        <li><strong>California (CCPA/CPRA):</strong> rights to know, delete, correct, and to <strong>opt out of the "sale/share"</strong> of personal information. Use the "Share cigar insights" toggle or contact us; we honor <em>Global Privacy Control</em> signals.</li>
+        <li><strong>EEA / UK (GDPR):</strong> access, rectification, erasure, restriction, portability, objection, and the right to withdraw consent. Our legal bases are your <em>consent</em> (analytics and insights), <em>performance of a contract</em> (running your account), <em>legal obligation</em> (age verification), and <em>legitimate interests</em> (security and integrity).</li>
+      </ul>
+      <p>To make any request, email <a href="mailto:privacy@leafcigars.fyi">privacy@leafcigars.fyi</a>.</p>
+    </section>
+
+    <section class="clause" id="p9">
+      <h3><span class="num">9</span> Security &amp; retention</h3>
+      <p>Data is encrypted in transit. Every record is protected by row-level security that scopes it to your account, and your photos live in private, per-user storage that no other user can read. No system is perfectly secure, but we work to protect your information.</p>
+      <p>We keep your data while your account is active and delete it when you delete your account. De-identified aggregate statistics, which do not identify you, may persist after deletion.</p>
+    </section>
+
+    <section class="clause" id="p10">
+      <h3><span class="num">10</span> Children, changes &amp; contact</h3>
+      <p>LEAF is not intended for anyone under 21. LEAF is operated from the United States and your information is processed there. We may update this policy and will post the new effective date; material changes will be surfaced in the app. Questions or requests: <a href="mailto:privacy@leafcigars.fyi">privacy@leafcigars.fyi</a>.</p>
+    </section>
+  </div>
+
+  <div class="docwrap shell">
+    <div class="docmark">Document 2</div>
+    <h2 class="dochead">Terms of Service</h2>
+    <p class="docsub">The agreement between you and LEAF for using the app.</p>
+    <hr class="rule" />
+
+    <section class="clause" id="t1">
+      <h3><span class="num">1</span> Agreement &amp; eligibility</h3>
+      <p>By creating an account or using LEAF, you agree to these Terms. You must be <strong>21 or older</strong> and able to form a binding contract. If you don't agree, don't use LEAF.</p>
+    </section>
+
+    <section class="clause" id="t2">
+      <h3><span class="num">2</span> What LEAF is (and isn't)</h3>
+      <p>LEAF is a <strong>personal journal</strong> for recording cigars you've smoked — a lifestyle and record-keeping tool. LEAF does <strong>not</strong> sell tobacco, facilitate the purchase of tobacco, or provide medical or health advice. "Where bought" and price fields are informational notes for your own records, never a transaction.</p>
+    </section>
+
+    <section class="clause" id="t3">
+      <h3><span class="num">3</span> Your account</h3>
+      <p>You sign in with Apple. You're responsible for activity under your account and for keeping access to your Apple ID secure. Tell us promptly of any unauthorized use.</p>
+    </section>
+
+    <section class="clause" id="t4">
+      <h3><span class="num">4</span> Your content &amp; the license you give us</h3>
+      <p>Your logs, notes, and photos are <strong>yours</strong>. To operate LEAF, you grant us a non-exclusive, worldwide license to store, process, and display that content <em>to you</em> as part of the service. <strong>Only if you opt in</strong> to "Share cigar insights," you also permit us to include your ratings and logged cigars in the de-identified, aggregate statistics described in the Privacy Policy §6. You confirm you have the rights to any content you add, including photographs.</p>
+    </section>
+
+    <section class="clause" id="t5">
+      <h3><span class="num">5</span> The catalog &amp; cigars you add</h3>
+      <p>LEAF's cigar catalog is shared reference data. If you add a cigar the catalog is missing, its <strong>factual details</strong> (brand, line, wrapper, etc.) enter the shared catalog for everyone; your <strong>opinions</strong> (rating, review, tasting notes, photo) stay on your private log and are never written into the shared catalog.</p>
+    </section>
+
+    <section class="clause" id="t6">
+      <h3><span class="num">6</span> Acceptable use</h3>
+      <p>Don't misuse LEAF: no unlawful use, no scraping or automated bulk access, no attempts to break security or access others' data, and no uploading content you don't have the rights to or that is unlawful.</p>
+    </section>
+
+    <section class="clause" id="t7">
+      <h3><span class="num">7</span> Disclaimers</h3>
+      <p>LEAF is provided <strong>"as is,"</strong> without warranties of any kind. Catalog information may be incomplete or inaccurate and is not a guarantee about any product. LEAF is not medical or health advice, and it makes no claim about the safety of tobacco. <strong>Tobacco use carries serious health risks.</strong></p>
+    </section>
+
+    <section class="clause" id="t8">
+      <h3><span class="num">8</span> Liability &amp; indemnity</h3>
+      <p>To the maximum extent permitted by law, LEAF and its operator are not liable for indirect, incidental, or consequential damages, and total liability is limited to <strong>US$100</strong>. You agree to indemnify LEAF for claims arising from content you add or your misuse of the service.</p>
+    </section>
+
+    <section class="clause" id="t9">
+      <h3><span class="num">9</span> Termination &amp; changes</h3>
+      <p>You can stop using LEAF and delete your account at any time. We may suspend or end access for violations of these Terms. We may update these Terms; if we make material changes we'll surface them in the app, and continued use means you accept them.</p>
+    </section>
+
+    <section class="clause" id="t10">
+      <h3><span class="num">10</span> Governing law &amp; contact</h3>
+      <p>These Terms are governed by the laws of the <strong>State of Georgia</strong>, United States, without regard to conflict-of-laws rules. Questions: <a href="mailto:support@leafcigars.fyi">support@leafcigars.fyi</a>.</p>
+    </section>
+  </div>
+
+  <div class="foot shell">
+    LEAF · Kevin Washington · Privacy Policy &amp; Terms of Service, v1.0 · Effective July 13, 2026 · <a href="mailto:privacy@leafcigars.fyi">privacy@leafcigars.fyi</a>
+  </div>
+</div>
