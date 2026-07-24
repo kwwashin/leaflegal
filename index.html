@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<meta name="description" content="LEAF is a private iPhone journal for cigars — log what you smoke, rate it, add tasting notes and a photo, and build a searchable history. For adults 21 and older.">
+<meta name="description" content="LEAF is a private iPhone journal for cigars — search the catalog, log what you smoke, rate it, record how strong and how full it felt, and build a searchable history. For adults 21 and older.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -27,20 +27,18 @@
   .hero-grid { display:grid; grid-template-columns:1.04fr 0.96fr; gap:56px; align-items:center; }
   .feat-grid { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center; }
 
-  /* ---- phone (shared with LEAF flow) ---- */
+  /* ---- phone (mirrors the app's Cedar surfaces) ---- */
   .phone { width:352px; min-height:748px; background:#F4EFE6; border-radius:42px; border:1px solid rgba(36,27,20,0.12); box-shadow:0 40px 90px -40px rgba(36,27,20,0.55); overflow:hidden; position:relative; display:flex; flex-direction:column; flex:none; }
   .body { flex:1; padding:6px 22px 0; display:flex; flex-direction:column; min-height:0; }
   .sbar { height:48px; flex:none; display:flex; align-items:center; justify-content:space-between; padding:0 28px; }
   .sbar b { font:600 15px 'Public Sans'; color:#241B14; }
   .batt { width:18px; height:10px; border:1.5px solid #241B14; border-radius:3px; }
-  .lt { font:600 16px/1 'Spectral',serif; color:#241B14; }
   .crumb { font:700 12px 'Public Sans'; letter-spacing:0.16em; text-transform:uppercase; color:#7B6C59; }
-  .ovr { font:700 11px 'Public Sans'; letter-spacing:0.2em; text-transform:uppercase; color:#7B6C59; }
+  .ovr { font:700 12px 'Public Sans'; letter-spacing:0.16em; text-transform:uppercase; color:#7B6C59; }
   .h1 { font:600 30px/1 'Spectral',serif; color:#241B14; }
   .sub { font:400 16px 'Public Sans'; color:#A2702A; }
   .btn-amber { width:100%; border:none; cursor:pointer; background:#A2702A; color:#FCFAF4; font:600 16px 'Public Sans'; padding:16px; border-radius:12px; }
   .btn-ink { width:100%; border:none; cursor:pointer; background:#241B14; color:#F4EFE6; font:600 16px 'Public Sans'; padding:16px; border-radius:12px; }
-  .field { background:#FCFAF4; border:1px solid rgba(36,27,20,0.16); border-radius:10px; padding:13px 15px; font:500 15px 'Public Sans'; color:#241B14; }
   .tile { display:flex; align-items:center; gap:13px; border:1px dashed rgba(36,27,20,0.28); border-radius:11px; padding:14px 15px; cursor:pointer; }
   .tile .ic { width:44px; height:44px; border-radius:9px; background:#FCFAF4; border:1px solid rgba(36,27,20,0.12); display:flex; align-items:center; justify-content:center; flex:none; }
   .exp { display:flex; align-items:center; justify-content:space-between; border:1px dashed rgba(36,27,20,0.26); border-radius:10px; padding:13px 15px; cursor:pointer; }
@@ -55,11 +53,65 @@
   .ni.on span { font-weight:600; }
   .photofill { background:linear-gradient(155deg,#7f6a51,#4f4030); }
 
+  /* ---- perceived Strength / Body meters (PerceivedMeter) ---- */
+  .meter { display:flex; flex-direction:column; gap:4px; }
+  .meter-head { display:flex; align-items:baseline; gap:6px; }
+  .meter-lab { font:700 12px 'Public Sans'; letter-spacing:0.16em; text-transform:uppercase; color:#7B6C59; }
+  .meter-val { font:500 15px 'Spectral',serif; margin-left:auto; }
+  .meter-bar { display:flex; gap:4px; }
+  .meter-bar i { flex:1; height:10px; border-radius:6px; background:rgba(36,27,20,0.18); }
+  .meter-ends { display:flex; justify-content:space-between; font:700 9px 'Public Sans'; letter-spacing:0.14em; text-transform:uppercase; color:#9A8B76; }
+  .info { width:15px; height:15px; border-radius:999px; border:1px solid rgba(162,112,42,0.5); color:#A2702A; font:700 10px/13px 'Public Sans'; text-align:center; align-self:center; }
+  /* compact journal-row meters (PerceivedMiniMeter) */
+  .mini { display:flex; align-items:center; gap:8px; margin-top:5px; }
+  .mini b { font:700 9px 'Public Sans'; letter-spacing:0.14em; text-transform:uppercase; color:#9A8B76; }
+  .mini .bar { display:flex; gap:2px; width:44px; }
+  .mini .bar i { flex:1; height:5px; border-radius:6px; background:rgba(36,27,20,0.18); }
+
+  /* ---- wrapper mark: leaf variety / shade swatch (WrapperChip + search scan line) ---- */
+  .wchip { display:inline-flex; align-items:center; gap:5px; background:rgba(94,65,40,0.09); border:1px solid rgba(94,65,40,0.32); border-radius:6px; padding:6px 12px; font:600 12px 'Public Sans'; letter-spacing:0.08em; text-transform:uppercase; color:#5E4128; }
+  .swatch { width:10px; height:10px; border-radius:999px; border:1px solid rgba(36,27,20,0.16); flex:none; }
+  .scan { display:flex; align-items:center; gap:4px; margin-top:3px; font:700 11px 'Public Sans'; letter-spacing:0.09em; text-transform:uppercase; color:#5E4128; }
+  .scan.none { font-weight:500; color:#9A8B76; }
+  .scan .swatch { width:9px; height:9px; }
+  .badge { font:600 10px 'Public Sans'; letter-spacing:0.12em; color:#7B6C59; flex:none; }
+  .badge.full { color:#A2702A; }
+
+  /* ---- flavor chips (FlavorTag) ---- */
+  .tag { display:inline-flex; align-items:center; gap:5px; background:#5E4128; color:#F4EFE6; border-radius:6px; padding:6px 11px; font:600 12px 'Public Sans'; }
+  .tag.out { background:transparent; color:#5E4128; border:1px solid rgba(94,65,40,0.4); }
+  .tag.add { background:transparent; color:#5E4128; border:1px dashed rgba(94,65,40,0.4); }
+
+  /* ---- blend spec rows (BlendSpecRow) ---- */
+  .spec { display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:12px 0; border-top:1px solid rgba(36,27,20,0.10); }
+  .spec.first { border-top:none; }
+  .spec .l { font:400 14px 'Public Sans'; color:#7B6C59; }
+  .spec .v { font:600 14px 'Public Sans'; color:#241B14; text-align:right; }
+  .spec .v em { font:400 14px 'Public Sans'; color:#9A8B76; font-style:normal; }
+
+  /* ---- comparison section (ComparisonSection — unframed) ---- */
+  .cmp { margin-top:16px; padding-top:16px; border-top:1px solid rgba(36,27,20,0.10); }
+  .cmp h4 { margin:0; font:700 11px 'Public Sans'; letter-spacing:0.2em; text-transform:uppercase; color:#7B6C59; }
+  .cmp .support { margin:4px 0 0; font:400 13px/1.45 'Public Sans'; color:#5A4E3E; }
+  .cmp .row { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:8px 0; border-bottom:1px solid rgba(36,27,20,0.10); }
+  .cmp .row .n { font:600 15px 'Spectral',serif; color:#241B14; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .cmp .row .why { font:400 11px 'Public Sans'; color:#9A8B76; white-space:nowrap; }
+
+  /* ---- explainer cards ---- */
+  .cards { margin-top:44px; display:flex; justify-content:center; gap:20px; flex-wrap:wrap; }
+  .card { width:270px; background:#FCFAF4; border:1px solid rgba(36,27,20,0.10); border-radius:16px; padding:28px 24px; text-align:left; }
+  .card .t { margin-top:18px; font:600 15px 'Public Sans'; color:#241B14; }
+  .card .d { margin-top:6px; font:400 13.5px/1.5 'Public Sans'; color:#7B6C59; }
+
   /* ---- app-store button ---- */
   .appbtn { display:inline-flex; align-items:center; gap:12px; background:#241B14; color:#F4EFE6; border:none; cursor:pointer; padding:13px 24px 13px 20px; border-radius:14px; text-align:left; transition:transform .15s ease; }
   .appbtn:hover { transform:translateY(-2px); }
   .appbtn .t1 { display:block; font:500 11px/1.1 'Public Sans'; letter-spacing:0.04em; color:rgba(244,239,230,0.75); }
   .appbtn .t2 { display:block; font:700 17px/1.1 'Public Sans'; color:#F4EFE6; margin-top:2px; }
+
+  .bullets { margin-top:26px; display:flex; flex-direction:column; gap:14px; }
+  .bullets div { display:flex; align-items:center; gap:12px; font:500 15px 'Public Sans'; color:#5A4E3E; }
+  .bullets i { width:7px; height:7px; background:#A2702A; transform:rotate(45deg); flex:none; }
 
   @media (max-width:900px){
     .hero-grid, .feat-grid { grid-template-columns:1fr; gap:44px; }
@@ -135,7 +187,7 @@
         <div class="eyebrow">A private journal for what you smoke</div>
         <h1 class="display-h1" style="margin:22px 0 0; font:600 68px/1.0 'Spectral',serif; letter-spacing:-0.018em; color:#241B14; text-wrap:balance;">Keep every cigar worth remembering.</h1>
         <p class="lead" style="margin:26px 0 0; max-width:508px;">A place to log the cigars you smoke, rate them, and keep your notes private.</p>
-        <p style="margin:18px 0 0; font:400 16px/1.68 'Public Sans'; color:#7B6C59; max-width:496px;">Search the catalog, log a smoke in a few taps, rate it, and add tasting notes and a photo. Over time you build a searchable history of everything you’ve smoked.</p>
+        <p style="margin:18px 0 0; font:400 16px/1.68 'Public Sans'; color:#7B6C59; max-width:496px;">Search the catalog, log a smoke in a few taps, rate it, and record how strong and how full it actually felt. Over time you build a searchable history of everything you’ve smoked.</p>
         <div style="margin-top:36px; display:flex; align-items:center; gap:22px; flex-wrap:wrap;">
           <button class="appbtn">
             <svg width="26" height="26" viewBox="0 0 384 512" fill="#F4EFE6"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zM262.1 104.5c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"></path></svg>
@@ -147,21 +199,36 @@
       <div class="feat-media" style="position:relative; display:flex; justify-content:center; align-items:center;">
         <div style="position:absolute; width:560px; height:560px; border-radius:50%; background:radial-gradient(circle at 50% 46%, rgba(222,106,30,0.30) 0%, rgba(222,106,30,0.12) 42%, rgba(222,106,30,0) 70%); filter:blur(8px); z-index:0;"></div>
         <div class="phone-wrap" style="position:relative; z-index:1;">
+          <!-- Catalog · cigar detail -->
           <div class="phone"><div class="sbar"><b>9:41</b><span class="batt"></span></div>
             <div class="body">
-              <div style="display:flex; align-items:center; gap:11px; padding:8px 0 12px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#241B14" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg><span class="crumb">Padrón</span></div>
+              <div style="display:flex; align-items:center; gap:11px; padding:8px 0 12px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#241B14" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg><span class="crumb">Catalog</span></div>
               <div style="flex:1;">
                 <div class="h1" style="font-size:32px;">Padrón</div>
                 <div class="sub" style="margin-top:6px; font-size:18px;">1926 Serie No. 6</div>
-                <div style="margin-top:9px; font:500 14px 'Public Sans'; color:#7B6C59;">Full-bodied · Box-pressed</div>
-                <div style="margin-top:16px; display:flex; flex-wrap:wrap; gap:7px;"><span style="color:#5E4128; border:1px solid rgba(94,65,40,0.4); border-radius:6px; padding:6px 11px; font:600 12px 'Public Sans';">Cocoa</span><span style="color:#5E4128; border:1px solid rgba(94,65,40,0.4); border-radius:6px; padding:6px 11px; font:600 12px 'Public Sans';">Cedar</span><span style="color:#5E4128; border:1px solid rgba(94,65,40,0.4); border-radius:6px; padding:6px 11px; font:600 12px 'Public Sans';">Leather</span></div>
-                <div style="margin-top:26px; display:flex; flex-direction:column; gap:13px;">
-                  <div style="display:flex; justify-content:space-between;"><span style="font:400 15px 'Public Sans'; color:#7B6C59;">Wrapper</span><span style="font:600 15px 'Public Sans'; color:#241B14;">Maduro</span></div>
-                  <div style="display:flex; justify-content:space-between; padding-top:13px; border-top:1px solid rgba(36,27,20,0.08);"><span style="font:400 15px 'Public Sans'; color:#7B6C59;">Origin</span><span style="font:600 15px 'Public Sans'; color:#241B14;">Nicaragua</span></div>
-                  <div style="display:flex; justify-content:space-between; padding-top:13px; border-top:1px solid rgba(36,27,20,0.08);"><span style="font:400 15px 'Public Sans'; color:#7B6C59;">Size</span><span style="font:600 15px 'Public Sans'; color:#241B14;">Robusto · 5×50</span></div>
+                <div style="margin-top:9px; font:500 14px 'Public Sans'; color:#7B6C59;">Full</div>
+                <div style="margin-top:16px; display:flex; flex-wrap:wrap; gap:8px;">
+                  <span class="wchip"><span class="swatch" style="background:#4A2E1C;"></span>Maduro</span>
+                  <span class="tag">Cocoa</span><span class="tag">Espresso</span>
+                </div>
+                <div class="ovr" style="margin-top:22px;">Notes to look for</div>
+                <div style="margin-top:4px;">
+                  <div class="spec first"><span class="l">Wrapper</span><span class="v">Maduro <em>· Nicaragua</em></span></div>
+                  <div class="spec"><span class="l">Binder</span><span class="v">Nicaragua</span></div>
+                  <div class="spec"><span class="l">Filler</span><span class="v">Nicaragua</span></div>
+                  <div class="spec"><span class="l">Origin</span><span class="v">Nicaragua</span></div>
+                </div>
+                <div class="cmp">
+                  <h4>Similar profiles</h4>
+                  <p class="support">Compared from catalog details</p>
+                  <div style="margin-top:8px;">
+                    <div class="row"><span class="n">Padrón 1964 Anniversary</span><span style="display:flex; align-items:center; gap:5px;"><span class="why">cocoa, same body</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9A8B76" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></span></div>
+                    <div class="row"><span class="n">My Father Le Bijou 1922</span><span style="display:flex; align-items:center; gap:5px;"><span class="why">pepper, same wrapper</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9A8B76" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></span></div>
+                    <div class="row"><span class="n">Oliva Serie V Melanio</span><span style="display:flex; align-items:center; gap:5px;"><span class="why">cocoa, one step milder</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9A8B76" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></span></div>
+                  </div>
                 </div>
               </div>
-              <div style="padding:14px 0 28px;"><button class="btn-ink">Log a smoke</button></div>
+              <div style="padding:18px 0 28px;"><button class="btn-ink">Log a smoke</button></div>
             </div>
           </div>
         </div>
@@ -177,21 +244,123 @@
     <p style="margin:16px auto 0; max-width:560px; font:400 17px/1.6 'Public Sans'; color:#7B6C59;">Start with the basics and add more detail whenever you want it.</p>
   </section>
 
-  <!-- ============ FEATURE 1 · LOG IT ============ -->
-  <section class="wrap" style="padding:80px 40px;">
+  <!-- ============ FEATURE 1 · FIND IT ============ -->
+  <section class="wrap" style="padding:80px 40px 40px;">
     <div class="feat-grid">
       <div class="feat-media" style="display:flex; justify-content:center;">
+        <!-- Search -->
+        <div class="phone"><div class="sbar"><b>9:41</b><span class="batt"></span></div>
+          <div class="body">
+            <div style="display:flex; align-items:center; justify-content:space-between; padding-top:6px;">
+              <span style="font:600 26px/1 'Spectral',serif; letter-spacing:0.18em; color:#241B14;">LEAF</span>
+            </div>
+            <div style="margin-top:24px; display:flex; align-items:center; gap:8px; background:#FCFAF4; border:1.5px solid #A2702A; border-radius:12px; padding:12px 14px; box-shadow:0 0 3px rgba(162,112,42,0.18);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A2702A" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
+              <span style="font:400 16px 'Public Sans'; color:#241B14;">padron</span>
+            </div>
+            <div style="flex:1; margin-top:10px;">
+              <div style="display:flex; align-items:center; gap:12px; padding:14px 12px;">
+                <div style="flex:1;">
+                  <div style="font:600 17px 'Spectral',serif; color:#241B14;">Padrón</div>
+                  <div style="margin-top:2px; font:400 13px 'Public Sans'; color:#7B6C59;">1926 Serie No. 6</div>
+                  <div class="scan"><span class="swatch" style="background:#4A2E1C;"></span>Maduro</div>
+                </div>
+                <span class="badge full">FULL</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9A8B76" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+              </div>
+              <div style="height:1px; background:rgba(36,27,20,0.10);"></div>
+              <div style="display:flex; align-items:center; gap:12px; padding:14px 12px;">
+                <div style="flex:1;">
+                  <div style="font:600 17px 'Spectral',serif; color:#241B14;">Padrón</div>
+                  <div style="margin-top:2px; font:400 13px 'Public Sans'; color:#7B6C59;">1964 Anniversary Natural</div>
+                  <div class="scan"><span class="swatch" style="background:#C08E4E;"></span>Natural</div>
+                </div>
+                <span class="badge">MEDIUM-FULL</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9A8B76" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+              </div>
+              <div style="height:1px; background:rgba(36,27,20,0.10);"></div>
+              <div style="display:flex; align-items:center; gap:12px; padding:14px 12px;">
+                <div style="flex:1;">
+                  <div style="font:600 17px 'Spectral',serif; color:#241B14;">Padrón</div>
+                  <div style="margin-top:2px; font:400 13px 'Public Sans'; color:#7B6C59;">Dámaso No. 12</div>
+                  <div class="scan"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#5E4128" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 4.5c.5 8-3.5 15-10 15-2.5 0-4.5-1.5-5-4C6 8.5 12 4 19.5 4.5Z"></path><path d="M4.5 19.5C8 15 13 10 19.5 4.5"></path></svg>Connecticut Shade</div>
+                </div>
+                <span class="badge">LIGHT</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9A8B76" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+              </div>
+              <div style="height:1px; background:rgba(36,27,20,0.10);"></div>
+              <div style="display:flex; align-items:center; gap:12px; padding:14px 12px;">
+                <div style="flex:1;">
+                  <div style="font:600 17px 'Spectral',serif; color:#241B14;">Padrón</div>
+                  <div style="margin-top:2px; font:400 13px 'Public Sans'; color:#7B6C59;">Family Reserve No. 50</div>
+                  <div class="scan"><span class="swatch" style="background:#4A2E1C;"></span>Maduro</div>
+                </div>
+                <span class="badge full">FULL</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9A8B76" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+              </div>
+            </div>
+            <div class="nav"><div class="ni on"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg><span>Search</span></div><div class="ni"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="4" width="14" height="16" rx="2"></rect><line x1="9" y1="4" x2="9" y2="20"></line></svg><span>Journal</span></div><div class="ni"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="9" r="3.2"></circle><path d="M5.5 19c0-3.4 2.9-5 6.5-5s6.5 1.6 6.5 5"></path></svg><span>You</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow">01 · Find it</div>
+        <h3 style="margin:18px 0 0; font:600 40px/1.1 'Spectral',serif; letter-spacing:-0.01em; color:#241B14;">A shelf you can read</h3>
+        <p class="lead" style="margin:20px 0 0; max-width:440px;">Search the shared catalog by brand or line. Every result leads with its cover leaf, so the list sorts by wrapper at a glance.</p>
+        <div class="bullets">
+          <div><i></i><span>The wrapper variety when the catalog states one.</span></div>
+          <div><i></i><span>A shade swatch when it states a colour instead.</span></div>
+          <div><i></i><span>An honest “not stated” when it says neither.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURE 2 · LOG IT ============ -->
+  <section class="wrap" style="padding:40px 40px 80px;">
+    <div class="feat-grid">
+      <div>
+        <div class="eyebrow">02 · Log it</div>
+        <h3 style="margin:18px 0 0; font:600 40px/1.1 'Spectral',serif; letter-spacing:-0.01em; color:#241B14;">A smoke in seconds</h3>
+        <p class="lead" style="margin:20px 0 0; max-width:440px;">Tap a rating, then — if you want — set how strong and how full it felt on two separate meters, add a tasting note and a photo.</p>
+        <div class="bullets">
+          <div><i></i><span>Strength and body are two axes, not one.</span></div>
+          <div><i></i><span>Both are optional; the log saves without them.</span></div>
+          <div><i></i><span>Vitola, place, and price stay tucked under Details.</span></div>
+        </div>
+      </div>
+      <div class="feat-media" style="display:flex; justify-content:center;">
+        <!-- Log a smoke -->
         <div class="phone"><div class="sbar"><b>9:41</b><span class="batt"></span></div>
           <div class="body">
             <div style="display:flex; align-items:center; gap:11px; padding:8px 0 12px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#241B14" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg><span class="crumb">Log a smoke</span></div>
             <div class="h1" style="font-size:27px;">Padrón</div>
             <div class="sub" style="margin-top:4px;">1926 Serie No. 6</div>
-            <div style="margin-top:22px;" class="ovr">How was it?</div>
-            <div class="stars" style="margin-top:12px; display:flex; gap:10px;"><span>★</span><span>★</span><span>★</span><span>★</span><span class="off">★</span></div>
-            <div style="margin-top:20px;" class="ovr">Review</div>
-            <div style="margin-top:11px; background:#FCFAF4; border:1px solid rgba(36,27,20,0.16); border-radius:10px; padding:13px 15px; min-height:66px; font:400 15px/1.5 'Public Sans'; color:#241B14;">Cocoa and cedar, a long leathery finish.</div>
-            <div style="margin-top:14px;" class="ovr">Tasting notes</div>
-            <div style="margin-top:9px; display:flex; flex-wrap:wrap; gap:7px;"><span style="display:inline-flex; align-items:center; gap:6px; background:#5E4128; color:#F4EFE6; border-radius:6px; padding:6px 11px; font:600 12px 'Public Sans';"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F4EFE6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L19 7"></path></svg>Cocoa</span><span style="display:inline-flex; align-items:center; gap:6px; background:#5E4128; color:#F4EFE6; border-radius:6px; padding:6px 11px; font:600 12px 'Public Sans';"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F4EFE6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L19 7"></path></svg>Cedar</span><span style="display:inline-flex; align-items:center; gap:6px; color:#8A7659; border:1.5px dashed rgba(94,65,40,0.45); border-radius:6px; padding:6px 11px; font:600 12px 'Public Sans';"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A7659" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="6" x2="12" y2="18"></line><line x1="6" y1="12" x2="18" y2="12"></line></svg>Leather</span><span style="display:inline-flex; align-items:center; gap:6px; color:#9A8B76; border:1.5px dashed rgba(36,27,20,0.28); border-radius:6px; padding:6px 11px; font:600 12px 'Public Sans';"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#9A8B76" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="6" x2="12" y2="18"></line><line x1="6" y1="12" x2="18" y2="12"></line></svg>type your own</span></div>
+            <div style="margin-top:20px; font:600 14px 'Public Sans'; color:#241B14;">How was it?</div>
+            <div class="stars" style="margin-top:10px; display:flex; gap:10px;"><span>★</span><span>★</span><span>★</span><span>★</span><span class="off">★</span></div>
+
+            <div style="margin-top:20px; display:flex; flex-direction:column; gap:16px;">
+              <div class="meter">
+                <div class="meter-head"><span class="meter-lab" style="color:#241B14;">Strength</span><span class="info">i</span><span class="meter-val" style="color:#5E4128;">Medium-Full</span></div>
+                <div class="meter-bar"><i style="background:#5E4128;"></i><i style="background:#5E4128;"></i><i style="background:#5E4128;"></i><i style="background:#5E4128;"></i><i></i></div>
+                <div class="meter-ends"><span>Mild</span><span>Full</span></div>
+              </div>
+              <div class="meter">
+                <div class="meter-head"><span class="meter-lab" style="color:#241B14;">Body</span><span class="info">i</span><span class="meter-val" style="color:#A2702A;">Full</span></div>
+                <div class="meter-bar"><i style="background:#A2702A;"></i><i style="background:#A2702A;"></i><i style="background:#A2702A;"></i><i style="background:#A2702A;"></i><i style="background:#A2702A;"></i></div>
+                <div class="meter-ends"><span>Light</span><span>Full</span></div>
+              </div>
+            </div>
+
+            <div style="margin-top:18px; font:600 14px 'Public Sans'; color:#241B14;">Review</div>
+            <div style="margin-top:9px; background:#FCFAF4; border:1px solid rgba(36,27,20,0.16); border-radius:10px; padding:13px 15px; min-height:58px; font:400 15px/1.5 'Public Sans'; color:#241B14;">Cocoa and cedar, a long leathery finish.</div>
+            <div style="margin-top:14px; font:600 14px 'Public Sans'; color:#241B14;">Tasting notes</div>
+            <div style="margin-top:9px; display:flex; flex-wrap:wrap; gap:7px;">
+              <span class="tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F4EFE6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L19 7"></path></svg>Cocoa</span>
+              <span class="tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F4EFE6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L19 7"></path></svg>Cedar</span>
+              <span class="tag out">Leather</span>
+              <span class="tag add">+ add your own</span>
+            </div>
             <div style="margin-top:14px; display:flex; flex-direction:column; gap:11px;">
               <div class="tile" style="padding:13px 15px;"><div class="ic" style="width:38px; height:38px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A2702A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"></path><circle cx="12" cy="13" r="3"></circle></svg></div><div style="font:600 14px 'Public Sans'; color:#241B14;">Add photo</div></div>
               <div class="exp"><div style="display:flex; align-items:center; gap:9px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A2702A" stroke-width="1.9" stroke-linecap="round"><line x1="12" y1="6" x2="12" y2="18"></line><line x1="6" y1="12" x2="18" y2="12"></line></svg><span style="font:600 14px 'Public Sans'; color:#241B14;">Details</span><span style="font:400 13px 'Public Sans'; color:#9A8B76;">— vitola, place, price</span></div><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#B29B7C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></div>
@@ -201,42 +370,71 @@
           </div>
         </div>
       </div>
-      <div>
-        <div class="eyebrow">01 · Log it</div>
-        <h3 style="margin:18px 0 0; font:600 40px/1.1 'Spectral',serif; letter-spacing:-0.01em; color:#241B14;">A smoke in seconds</h3>
-        <p class="lead" style="margin:20px 0 0; max-width:440px;">Find the cigar, tap a rating, and add a tasting note and a photo. Extra detail like vitola, place, and price is optional.</p>
-        <div style="margin-top:26px; display:flex; flex-direction:column; gap:14px;">
-          <div style="display:flex; align-items:center; gap:12px;"><span style="width:7px; height:7px; background:#A2702A; transform:rotate(45deg); flex:none;"></span><span style="font:500 15px 'Public Sans'; color:#5A4E3E;">Rate and review at the same time.</span></div>
-          <div style="display:flex; align-items:center; gap:12px;"><span style="width:7px; height:7px; background:#A2702A; transform:rotate(45deg); flex:none;"></span><span style="font:500 15px 'Public Sans'; color:#5A4E3E;">Tasting notes with smart suggestions.</span></div>
-          <div style="display:flex; align-items:center; gap:12px;"><span style="width:7px; height:7px; background:#A2702A; transform:rotate(45deg); flex:none;"></span><span style="font:500 15px 'Public Sans'; color:#5A4E3E;">Add vitola, place, and price if you want them.</span></div>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- ============ FEATURE 2 · KEEP IT ============ -->
+  <!-- ============ FEATURE 3 · KEEP IT ============ -->
   <section style="background:#FCFAF4; border-top:1px solid rgba(36,27,20,0.07); border-bottom:1px solid rgba(36,27,20,0.07);">
     <div class="wrap" style="padding:88px 40px;">
       <div class="feat-grid">
         <div>
-          <div class="eyebrow">02 · Keep it</div>
+          <div class="eyebrow">03 · Keep it</div>
           <h3 style="margin:18px 0 0; font:600 40px/1.1 'Spectral',serif; letter-spacing:-0.01em; color:#241B14;">A journal you’ll revisit</h3>
-          <p class="lead" style="margin:20px 0 0; max-width:440px;">Every cigar you’ve tried in one place, searchable and easy to compare.</p>
-          <div style="margin-top:26px; display:flex; flex-direction:column; gap:14px;">
-            <div style="display:flex; align-items:center; gap:12px;"><span style="width:7px; height:7px; background:#A2702A; transform:rotate(45deg); flex:none;"></span><span style="font:500 15px 'Public Sans'; color:#5A4E3E;">Search back to any cigar you’ve logged.</span></div>
-            <div style="display:flex; align-items:center; gap:12px;"><span style="width:7px; height:7px; background:#A2702A; transform:rotate(45deg); flex:none;"></span><span style="font:500 15px 'Public Sans'; color:#5A4E3E;">Ratings you can compare side by side.</span></div>
-            <div style="display:flex; align-items:center; gap:12px;"><span style="width:7px; height:7px; background:#A2702A; transform:rotate(45deg); flex:none;"></span><span style="font:500 15px 'Public Sans'; color:#5A4E3E;">Private to your account.</span></div>
+          <p class="lead" style="margin:20px 0 0; max-width:440px;">Every cigar you’ve logged in one place — searchable, filterable, and easy to compare.</p>
+          <div class="bullets">
+            <div><i></i><span>Search your own notes, places, and cigars.</span></div>
+            <div><i></i><span>Filter by rating, tasting note, wrapper, or origin.</span></div>
+            <div><i></i><span>Your own strength and body read on every row.</span></div>
           </div>
         </div>
         <div class="feat-media" style="display:flex; justify-content:center;">
+          <!-- Journal list -->
           <div class="phone"><div class="sbar"><b>9:41</b><span class="batt"></span></div>
             <div class="body">
-              <div style="display:flex; align-items:baseline; justify-content:space-between;"><span style="font:600 27px/1 'Spectral',serif; color:#241B14;">Your journal</span><span style="font:600 12px 'Public Sans'; color:#7B6C59;">142</span></div>
-              <div style="margin-top:14px; display:flex; align-items:center; gap:10px; background:rgba(78,97,68,0.12); border:1px solid rgba(78,97,68,0.3); border-radius:10px; padding:11px 13px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#4E6144" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L19 7"></path></svg><span style="font:600 13px 'Public Sans'; color:#3B4A34;">Logged · Padrón 1926</span></div>
-              <div style="flex:1; margin-top:6px;">
-                <div style="display:flex; align-items:center; gap:9px; padding:15px 10px; margin:0 -10px; background:rgba(162,112,42,0.07); border-radius:11px; border-bottom:1px solid rgba(36,27,20,0.10);"><div style="flex:1;"><div style="display:flex; justify-content:space-between;"><span style="font:600 17px 'Spectral',serif; color:#241B14;">Padrón</span><span class="rowstars">★★★★<span class="off">★</span></span></div><div style="margin-top:3px; font:400 13.5px 'Public Sans'; color:#7B6C59;">1926 Serie No. 6 · Robusto</div><div style="margin-top:6px; font:500 12px 'Public Sans'; color:#9A8B76;">Just now · Cigar Room, Atlanta</div></div><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#A2702A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
-                <div style="display:flex; align-items:center; gap:9px; padding:15px 0; border-bottom:1px solid rgba(36,27,20,0.10);"><div style="flex:1;"><div style="display:flex; justify-content:space-between;"><span style="font:600 17px 'Spectral',serif; color:#241B14;">Oliva</span><span class="rowstars">★★★★<span class="off">★</span></span></div><div style="margin-top:3px; font:400 13.5px 'Public Sans'; color:#7B6C59;">Serie V Melanio · Toro</div><div style="margin-top:6px; font:500 12px 'Public Sans'; color:#9A8B76;">Yesterday</div></div><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C0B4A2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
-                <div style="display:flex; align-items:center; gap:9px; padding:15px 0; border-bottom:1px solid rgba(36,27,20,0.10);"><div style="flex:1;"><div style="display:flex; justify-content:space-between;"><span style="font:600 17px 'Spectral',serif; color:#241B14;">Arturo Fuente</span><span class="rowstars">★★★<span class="off">★★</span></span></div><div style="margin-top:3px; font:400 13.5px 'Public Sans'; color:#7B6C59;">Hemingway · Short Story</div><div style="margin-top:6px; font:500 12px 'Public Sans'; color:#9A8B76;">Sat · Back porch</div></div><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C0B4A2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div>
+              <div style="padding-top:6px;">
+                <div class="crumb">Journal</div>
+                <div style="margin-top:6px; font:600 26px/1 'Spectral',serif; color:#241B14;">Your smokes</div>
+              </div>
+              <div style="margin-top:16px; display:flex; align-items:center; gap:10px;">
+                <div style="flex:1; display:flex; align-items:center; gap:8px; background:#FCFAF4; border:1px solid rgba(36,27,20,0.16); border-radius:12px; padding:11px 13px;">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9A8B76" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
+                  <span style="font:400 14px 'Public Sans'; color:#9A8B76;">Search your journal</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:6px; border:1px solid rgba(162,112,42,0.5); border-radius:12px; padding:11px 13px;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A2702A" stroke-width="1.9" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"></line><line x1="7" y1="12" x2="17" y2="12"></line><line x1="10" y1="17" x2="14" y2="17"></line></svg>
+                  <span style="font:600 13px 'Public Sans'; color:#A2702A;">Filter</span>
+                </div>
+              </div>
+              <div style="margin-top:14px; font:400 13px 'Public Sans'; color:#9A8B76;"><span style="font-weight:700; color:#241B14;">142</span> of 142 logs</div>
+              <div style="flex:1; margin-top:4px;">
+                <div style="display:flex; align-items:center; gap:9px; padding:14px 10px; margin:0 -10px; background:rgba(162,112,42,0.07); border-radius:11px; border-bottom:1px solid rgba(36,27,20,0.10);">
+                  <div style="flex:1;">
+                    <div style="display:flex; justify-content:space-between;"><span style="font:600 17px 'Spectral',serif; color:#241B14;">Padrón</span><span class="rowstars">★★★★<span class="off">★</span></span></div>
+                    <div style="margin-top:3px; font:400 13.5px 'Public Sans'; color:#7B6C59;">1926 Serie No. 6 · Robusto</div>
+                    <div class="mini"><b>Strength</b><span class="bar"><i style="background:#5E4128;"></i><i style="background:#5E4128;"></i><i style="background:#5E4128;"></i><i style="background:#5E4128;"></i><i></i></span><b>Body</b><span class="bar"><i style="background:#A2702A;"></i><i style="background:#A2702A;"></i><i style="background:#A2702A;"></i><i style="background:#A2702A;"></i><i style="background:#A2702A;"></i></span></div>
+                    <div style="margin-top:6px; font:400 13px 'Public Sans'; color:#5A4E3E;">Cocoa and cedar, a long leathery finish.</div>
+                    <div style="margin-top:5px; font:500 12px 'Public Sans'; color:#9A8B76;">Just now · Cigar Room, Atlanta</div>
+                  </div>
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#A2702A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+                </div>
+                <div style="display:flex; align-items:center; gap:9px; padding:14px 0; border-bottom:1px solid rgba(36,27,20,0.10);">
+                  <div style="flex:1;">
+                    <div style="display:flex; justify-content:space-between;"><span style="font:600 17px 'Spectral',serif; color:#241B14;">Oliva</span><span class="rowstars">★★★★<span class="off">★</span></span></div>
+                    <div style="margin-top:3px; font:400 13.5px 'Public Sans'; color:#7B6C59;">Serie V Melanio · Toro</div>
+                    <div class="mini"><b>Strength</b><span class="bar"><i style="background:#5E4128;"></i><i style="background:#5E4128;"></i><i style="background:#5E4128;"></i><i></i><i></i></span><b>Body</b><span class="bar"><i style="background:#A2702A;"></i><i style="background:#A2702A;"></i><i style="background:#A2702A;"></i><i style="background:#A2702A;"></i><i></i></span></div>
+                    <div style="margin-top:5px; font:500 12px 'Public Sans'; color:#9A8B76;">Yesterday</div>
+                  </div>
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C0B4A2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+                </div>
+                <div style="display:flex; align-items:center; gap:9px; padding:14px 0; border-bottom:1px solid rgba(36,27,20,0.10);">
+                  <div style="flex:1;">
+                    <div style="display:flex; justify-content:space-between;"><span style="font:600 17px 'Spectral',serif; color:#241B14;">Arturo Fuente</span><span class="rowstars">★★★<span class="off">★★</span></span></div>
+                    <div style="margin-top:3px; font:400 13.5px 'Public Sans'; color:#7B6C59;">Hemingway · Short Story</div>
+                    <div class="mini"><b>Body</b><span class="bar"><i style="background:#A2702A;"></i><i style="background:#A2702A;"></i><i style="background:#A2702A;"></i><i></i><i></i></span></div>
+                    <div style="margin-top:5px; font:500 12px 'Public Sans'; color:#9A8B76;">Sat · Back porch</div>
+                  </div>
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#C0B4A2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+                </div>
               </div>
               <div class="nav"><div class="ni"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg><span>Search</span></div><div class="ni on"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="4" width="14" height="16" rx="2"></rect><line x1="9" y1="4" x2="9" y2="20"></line></svg><span>Journal</span></div><div class="ni"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="9" r="3.2"></circle><path d="M5.5 19c0-3.4 2.9-5 6.5-5s6.5 1.6 6.5 5"></path></svg><span>You</span></div></div>
             </div>
@@ -246,77 +444,126 @@
     </div>
   </section>
 
-  <!-- ============ FEATURE 3 · OWN IT (ink) ============ -->
+  <!-- ============ FEATURE 4 · OWN IT (ink) ============ -->
   <section style="background:#241B14;">
     <div class="wrap" style="padding:92px 40px;">
       <div class="feat-grid">
         <div class="feat-media" style="display:flex; justify-content:center;">
+          <!-- Journal entry detail -->
           <div class="phone" style="background:#F4EFE6; box-shadow:0 50px 100px -40px rgba(0,0,0,0.7); height:auto; min-height:748px;"><div class="sbar"><b>9:41</b><span class="batt"></span></div>
             <div class="body">
               <div style="display:flex; align-items:center; gap:11px; padding:8px 0 10px;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#241B14" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg><span class="crumb">Journal</span></div>
               <div style="flex:1;">
                 <div class="h1" style="font-size:27px;">Padrón</div>
                 <div class="sub" style="margin-top:4px;">1926 Serie No. 6</div>
-                <div style="margin-top:10px; display:flex; align-items:center; gap:11px;"><span class="rowstars" style="font-size:20px;">★★★★<span class="off">★</span></span><span style="font:500 13px 'Public Sans'; color:#7B6C59;">Jul 8, 2026 · 8:12 PM</span></div>
+                <div style="margin-top:10px; display:flex; align-items:center; gap:11px;"><span class="rowstars" style="font-size:20px;">★★★★<span class="off">★</span></span><span style="font:500 13px 'Public Sans'; color:#9A8B76;">Jul 8, 2026 · 8:12 PM</span></div>
+
+                <!-- perceived meters, at the top of the entry -->
+                <div style="margin-top:16px; display:flex; flex-direction:column; gap:12px;">
+                  <div class="meter">
+                    <div class="meter-head"><span class="meter-lab">Strength</span><span class="meter-val" style="color:#5E4128;">Medium-Full</span></div>
+                    <div class="meter-bar"><i style="background:#5E4128;"></i><i style="background:#5E4128;"></i><i style="background:#5E4128;"></i><i style="background:#5E4128;"></i><i></i></div>
+                    <div class="meter-ends"><span>Mild</span><span>Full</span></div>
+                  </div>
+                  <div class="meter">
+                    <div class="meter-head"><span class="meter-lab">Body</span><span class="meter-val" style="color:#A2702A;">Full</span></div>
+                    <div class="meter-bar"><i style="background:#A2702A;"></i><i style="background:#A2702A;"></i><i style="background:#A2702A;"></i><i style="background:#A2702A;"></i><i style="background:#A2702A;"></i></div>
+                    <div class="meter-ends"><span>Light</span><span>Full</span></div>
+                  </div>
+                </div>
+
                 <div style="margin-top:22px; display:flex; align-items:center; gap:8px;"><span style="width:8px; height:8px; border-radius:999px; background:#A2702A; flex:none;"></span><span class="ovr" style="color:#A2702A;">Your log</span><span style="font:500 12px 'Public Sans'; color:#9A8B76;">— entered by you</span></div>
                 <div class="photofill" style="margin-top:13px; height:128px; border-radius:13px; display:flex; align-items:flex-end; padding:11px;"><span style="font:600 10px 'Public Sans'; letter-spacing:0.14em; text-transform:uppercase; color:rgba(244,239,230,0.85);">Your photo</span></div>
                 <div style="margin-top:13px; font:400 15px/1.55 'Public Sans'; color:#241B14;">Cocoa and cedar, a long leathery finish. Had it slow after dinner.</div>
-                <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:7px;"><span style="display:inline-flex; align-items:center; gap:6px; background:#5E4128; color:#F4EFE6; border-radius:6px; padding:6px 11px; font:600 12px 'Public Sans';"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F4EFE6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L19 7"></path></svg>Cocoa</span><span style="display:inline-flex; align-items:center; gap:6px; background:#5E4128; color:#F4EFE6; border-radius:6px; padding:6px 11px; font:600 12px 'Public Sans';"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F4EFE6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L19 7"></path></svg>Cedar</span><span style="display:inline-flex; align-items:center; gap:6px; background:#5E4128; color:#F4EFE6; border-radius:6px; padding:6px 11px; font:600 12px 'Public Sans';"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F4EFE6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L18.5 9.5a2.1 2.1 0 0 0-3-3L5 17v3z"></path><path d="M13.5 6.5l3 3"></path></svg>Pepper</span></div>
+                <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:7px;">
+                  <span class="tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F4EFE6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L19 7"></path></svg>Cocoa</span>
+                  <span class="tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F4EFE6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L19 7"></path></svg>Cedar</span>
+                  <span class="tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F4EFE6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L18.5 9.5a2.1 2.1 0 0 0-3-3L5 17v3z"></path><path d="M13.5 6.5l3 3"></path></svg>Barnyard</span>
+                </div>
                 <div style="margin-top:14px; display:flex; flex-direction:column; gap:10px;">
                   <div style="display:flex; align-items:center; gap:9px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A2702A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M12 21c4-4.6 6-7.5 6-10.2A6 6 0 1 0 6 10.8c0 2.7 2 5.6 6 10.2z"></path><circle cx="12" cy="10.6" r="2.2"></circle></svg><span style="font:500 13.5px 'Public Sans'; color:#5A4E3E;">Cigar Room · Atlanta, GA</span></div>
                   <div style="display:flex; align-items:center; gap:9px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A2702A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M20 7H4a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1z"></path><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path></svg><span style="font:500 13.5px 'Public Sans'; color:#5A4E3E;">Highland Cigar Co. · <span style="color:#241B14; font-weight:600;">$28</span></span></div>
                 </div>
-                <div style="margin-top:24px; display:flex; align-items:center; gap:8px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7B6C59" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M12 2l7 3v6c0 4.4-3 8-7 9-4-1-7-4.6-7-9V5z"></path><path d="M9 12l2 2 4-4"></path></svg><span class="ovr" style="color:#7B6C59;">From the catalog</span><span style="font:500 12px 'Public Sans'; color:#9A8B76;">— stated by LEAF</span></div>
-                <div style="margin-top:12px; background:rgba(36,27,20,0.035); border:1px solid rgba(36,27,20,0.12); border-radius:12px; padding:15px 16px;">
-                  <div style="display:flex; flex-direction:column; gap:11px;">
-                    <div style="display:flex; justify-content:space-between; align-items:baseline;"><span style="font:400 13.5px 'Public Sans'; color:#7B6C59;">Strength</span><span style="font:600 13.5px 'Public Sans'; color:#241B14;">Full-bodied</span></div>
-                    <div style="display:flex; justify-content:space-between; align-items:baseline; padding-top:11px; border-top:1px solid rgba(36,27,20,0.09);"><span style="font:400 13.5px 'Public Sans'; color:#7B6C59;">Wrapper</span><span style="font:600 13.5px 'Public Sans'; color:#241B14;">Maduro</span></div>
-                    <div style="display:flex; justify-content:space-between; align-items:baseline; padding-top:11px; border-top:1px solid rgba(36,27,20,0.09);"><span style="font:400 13.5px 'Public Sans'; color:#7B6C59;">Origin</span><span style="font:600 13.5px 'Public Sans'; color:#241B14;">Nicaragua</span></div>
+                <div style="margin-top:24px; display:flex; align-items:center; gap:8px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#A2702A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M12 2l7 3v6c0 4.4-3 8-7 9-4-1-7-4.6-7-9V5z"></path><path d="M9 12l2 2 4-4"></path></svg><span class="ovr" style="color:#A2702A;">From the catalog</span><span style="font:500 12px 'Public Sans'; color:#9A8B76;">— stated by LEAF</span></div>
+                <div style="margin-top:12px; background:#FCFAF4; border:1px solid rgba(36,27,20,0.16); border-radius:14px; padding:4px 16px;">
+                  <div class="spec first"><span class="l">Wrapper</span><span class="v">Maduro <em>· Nicaragua</em></span></div>
+                  <div class="spec"><span class="l">Binder</span><span class="v">Nicaragua</span></div>
+                  <div class="spec"><span class="l">Filler</span><span class="v">Nicaragua</span></div>
+                  <div class="spec"><span class="l">Origin</span><span class="v">Nicaragua</span></div>
+                  <div style="padding:6px 0 14px;">
+                    <div class="ovr" style="color:#9A8B76; font-size:11px;">Notes to look for</div>
+                    <div style="margin-top:9px; display:flex; flex-wrap:wrap; gap:7px;"><span class="tag out">Cocoa</span><span class="tag out">Espresso</span><span class="tag out">Pepper</span></div>
                   </div>
                 </div>
+                <div style="margin-top:20px; padding-bottom:26px;"><button class="btn-amber">Log this again</button></div>
               </div>
             </div>
           </div>
         </div>
         <div>
-          <div class="eyebrow" style="color:#C79A55;">03 · Own it</div>
+          <div class="eyebrow" style="color:#C79A55;">04 · Own it</div>
           <h3 style="margin:18px 0 0; font:600 40px/1.1 'Spectral',serif; letter-spacing:-0.01em; color:#F4EFE6;">Private by default</h3>
-          <p style="margin:20px 0 0; max-width:440px; font:400 19px/1.6 'Public Sans'; color:#CBB99E;">Your reviews and photos stay private and are shown to no one. Anything you add to the shared catalog is factual information only.</p>
+          <p style="margin:20px 0 0; max-width:440px; font:400 19px/1.6 'Public Sans'; color:#CBB99E;">Your reviews, photos, and your own strength and body read stay private and are shown to no one. Anything you add to the shared catalog is factual information only.</p>
           <div style="margin-top:28px; display:flex; flex-direction:column; gap:16px;">
             <div style="display:flex; align-items:flex-start; gap:12px;">
               <span style="width:8px; height:8px; border-radius:999px; background:#A2702A; flex:none; margin-top:7px;"></span>
-              <div><div style="font:600 15px 'Public Sans'; color:#F4EFE6;">Your log</div><div style="font:400 14px/1.5 'Public Sans'; color:#A99B84;">Rating, review, photo, place, and price stay with you.</div></div>
+              <div><div style="font:600 15px 'Public Sans'; color:#F4EFE6;">Your log</div><div style="font:400 14px/1.5 'Public Sans'; color:#A99B84;">Rating, review, meters, photo, place, and price stay with you.</div></div>
             </div>
             <div style="display:flex; align-items:flex-start; gap:12px;">
               <span style="width:8px; height:8px; border-radius:2px; background:#7B6C59; flex:none; margin-top:7px;"></span>
               <div><div style="font:600 15px 'Public Sans'; color:#F4EFE6;">From the catalog</div><div style="font:400 14px/1.5 'Public Sans'; color:#A99B84;">Only factual details, shared with everyone.</div></div>
             </div>
           </div>
+          <p style="margin:28px 0 0; max-width:440px; font:400 15px/1.6 'Public Sans'; color:#8A7B65;">You can export everything you’ve logged, or delete your account and its contents, from Settings.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============ TASTING-NOTE DETAIL ============ -->
-  <section class="wrap" style="padding:96px 40px; text-align:center;">
+  <section class="wrap" style="padding:96px 40px 60px; text-align:center;">
     <div class="eyebrow">How tasting notes work</div>
     <h2 style="margin:16px auto 0; max-width:640px; font:600 40px/1.12 'Spectral',serif; letter-spacing:-0.01em; color:#241B14; text-wrap:balance;">You decide every note.</h2>
     <p style="margin:16px auto 0; max-width:560px; font:400 17px/1.6 'Public Sans'; color:#7B6C59;">Every tasting note is marked with where it came from, so your review reflects what you actually thought.</p>
-    <div style="margin-top:44px; display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
-      <div style="width:270px; background:#FCFAF4; border:1px solid rgba(36,27,20,0.10); border-radius:16px; padding:28px 24px;">
-        <span style="display:inline-flex; align-items:center; gap:7px; background:#5E4128; color:#F4EFE6; border-radius:7px; padding:8px 14px; font:600 14px 'Public Sans';"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F4EFE6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L19 7"></path></svg>Cocoa</span>
-        <div style="margin-top:18px; font:600 15px 'Public Sans'; color:#241B14;">You agreed</div>
-        <div style="margin-top:6px; font:400 13.5px/1.5 'Public Sans'; color:#7B6C59;">A note LEAF suggested that you confirmed with a tap.</div>
+    <div class="cards">
+      <div class="card">
+        <span class="tag" style="font-size:14px; padding:8px 14px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F4EFE6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L19 7"></path></svg>Cocoa</span>
+        <div class="t">You agreed</div>
+        <div class="d">A note from LEAF’s list that you confirmed with a tap.</div>
       </div>
-      <div style="width:270px; background:#FCFAF4; border:1px solid rgba(36,27,20,0.10); border-radius:16px; padding:28px 24px;">
-        <span style="display:inline-flex; align-items:center; gap:7px; color:#8A7659; border:1.5px dashed rgba(94,65,40,0.5); border-radius:7px; padding:8px 14px; font:600 14px 'Public Sans';"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8A7659" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="6" x2="12" y2="18"></line><line x1="6" y1="12" x2="18" y2="12"></line></svg>Leather</span>
-        <div style="margin-top:18px; font:600 15px 'Public Sans'; color:#241B14;">A suggestion</div>
-        <div style="margin-top:6px; font:400 13.5px/1.5 'Public Sans'; color:#7B6C59;">Offered by the catalog. Add it or ignore it.</div>
+      <div class="card">
+        <span class="tag out" style="font-size:14px; padding:8px 14px;">Leather</span>
+        <div class="t">A suggestion</div>
+        <div class="d">Offered by the catalog. Add it or ignore it.</div>
       </div>
-      <div style="width:270px; background:#FCFAF4; border:1px solid rgba(36,27,20,0.10); border-radius:16px; padding:28px 24px;">
-        <span style="display:inline-flex; align-items:center; gap:7px; background:#5E4128; color:#F4EFE6; border-radius:7px; padding:8px 14px; font:600 14px 'Public Sans';"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F4EFE6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L18.5 9.5a2.1 2.1 0 0 0-3-3L5 17v3z"></path><path d="M13.5 6.5l3 3"></path></svg>Pepper</span>
-        <div style="margin-top:18px; font:600 15px 'Public Sans'; color:#241B14;">Your own</div>
-        <div style="margin-top:6px; font:400 13.5px/1.5 'Public Sans'; color:#7B6C59;">Typed by you. The pencil marks it as yours.</div>
+      <div class="card">
+        <span class="tag" style="font-size:14px; padding:8px 14px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F4EFE6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L18.5 9.5a2.1 2.1 0 0 0-3-3L5 17v3z"></path><path d="M13.5 6.5l3 3"></path></svg>Barnyard</span>
+        <div class="t">Your own</div>
+        <div class="d">Typed by you. The pencil marks it as yours.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WRAPPER DETAIL ============ -->
+  <section class="wrap" style="padding:40px 40px 96px; text-align:center;">
+    <div class="eyebrow">How the wrapper reads</div>
+    <h2 style="margin:16px auto 0; max-width:640px; font:600 40px/1.12 'Spectral',serif; letter-spacing:-0.01em; color:#241B14; text-wrap:balance;">The leaf, up front.</h2>
+    <p style="margin:16px auto 0; max-width:600px; font:400 17px/1.6 'Public Sans'; color:#7B6C59;">Search rows and cigar pages lead with the cover leaf. LEAF shows the most specific thing the catalog actually states — and says so plainly when it states nothing.</p>
+    <div class="cards">
+      <div class="card">
+        <span class="wchip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#5E4128" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 4.5c.5 8-3.5 15-10 15-2.5 0-4.5-1.5-5-4C6 8.5 12 4 19.5 4.5Z"></path><path d="M4.5 19.5C8 15 13 10 19.5 4.5"></path></svg>Sumatra</span>
+        <div class="t">A leaf variety</div>
+        <div class="d">The most specific fact, so it always leads. The origin trails it quietly.</div>
+      </div>
+      <div class="card">
+        <span class="wchip"><span class="swatch" style="background:#4A2E1C;"></span>Maduro</span>
+        <div class="t">A shade</div>
+        <div class="d">When the catalog names a colour rather than a variety, the swatch stands in for the leaf.</div>
+      </div>
+      <div class="card">
+        <span style="display:inline-flex; font:500 12px 'Public Sans'; letter-spacing:0.09em; text-transform:uppercase; color:#9A8B76; padding:6px 0;">Nicaragua · not stated</span>
+        <div class="t">Neither</div>
+        <div class="d">No guess. The row says what is known and stops there.</div>
       </div>
     </div>
   </section>
